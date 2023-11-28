@@ -38,11 +38,14 @@ Nenhuma
    - Mensagens claras e instruções para orientar o usuário durante o processo.
    - Tratamento de erros para garantir uma experiência de usuário suave.
 
+## Autores e Contribuidores
+| Nome do Autor | RM |
+|---------------|--------|
+| Rafael de Almeida    | 554019 |
+| Lucca    | 553678 |
+
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar pull requests.
-
-## Autor
-[Seu Nome]
 
 ## Licença
 Este projeto está licenciado sob a [Licença MIT](LICENSE).
