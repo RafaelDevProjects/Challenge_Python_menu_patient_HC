@@ -1,6 +1,6 @@
 
 
-<img src="imagens/Captura de tela 2023-11-28 153145.jpg" alt="Logo da Minha Aplicação" width="400" border-radius: 10px />
+<img src="imagens/Captura de tela 2023-11-28 153145.jpg" alt="Logo da Minha Aplicação" width="500"/>
 
 <img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="100"/>
 
