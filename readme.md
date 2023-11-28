@@ -38,7 +38,7 @@ Nenhuma
    - Mensagens claras e instruções para orientar o usuário durante o processo.
    - Tratamento de erros para garantir uma experiência de usuário suave.
 
-## Autores e Contribuidores
+## Autores
 | Nome do Autor | RM |
 |---------------|--------|
 | Rafael de Almeida    | 554019 |
