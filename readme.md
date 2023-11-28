@@ -14,7 +14,7 @@ Nenhuma
 
 ## Instruções de Uso
 1. **Clone o repositório:** `git clone https://github.com/seu-usuario/HealthConnect.git`
-2. **Navegue até o diretório do projeto:** `cd HealthConnect`
+2. **Navegue até o diretório do projeto:** `cd main.py`
 3. **Execute o script principal:** `python main.py`
 4. **Siga as instruções na linha de comando para:**
    - Preencher detalhes do paciente, incluindo nome, idade, data de nascimento, endereço, etc.
