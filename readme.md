@@ -13,9 +13,9 @@ O HealthConnect é um sistema simples para agendamento de exames e criação de 
 Nenhuma
 
 ## Instruções de Uso
-1. **Clone o repositório:** `git clone https://github.com/seu-usuario/HealthConnect.git`
+1. **Clone o repositório:** `git clone https://github.com/RafaelDevProjects/gs-python-HealthConnect.git`  
 2. **Navegue até o diretório do projeto:** `cd main.py`
-3. **Execute o script principal:** `python main.py`
+3. **Execute o script principal:** `main.py`
 4. **Siga as instruções na linha de comando para:**
    - Preencher detalhes do paciente, incluindo nome, idade, data de nascimento, endereço, etc.
    - Agendar exames, escolhendo entre opções como raio-x, ultrassom, tomografia, ressonância, ecocardiograma.
