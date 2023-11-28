@@ -1,6 +1,7 @@
-<img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="300"/>
+<img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="400"/>
 
-<h1><spam style="color:#FDB3D5">Health</spam><span style="color:#77DBE8">Connect</span></h1>
+<img src="imagens/Captura de tela 2023-11-28 153145.jpg" alt="Logo da Minha Aplicação" width="400"/>
+
 
 
 ## Descrição
