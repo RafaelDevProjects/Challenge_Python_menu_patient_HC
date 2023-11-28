@@ -49,5 +49,3 @@ Nenhuma
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar pull requests.
 
-## Licença
-Este projeto está licenciado sob a [Licença MIT](LICENSE).
