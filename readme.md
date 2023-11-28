@@ -6,6 +6,8 @@ O HealthConnect é um sistema simples para agendamento de exames e criação de 
 ## Requisitos
 - Python 3.x
 - Biblioteca SQLite3 (já incluída no Python)
+- Terminal com suporte a cores ANSI (para melhor experiência de usuário)
+
 
 ## Dependências
 Nenhuma
