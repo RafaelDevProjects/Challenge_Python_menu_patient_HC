@@ -1,4 +1,4 @@
-# HealthConnect - Sistema de Agendamento de Exames e Ficha do Paciente
+# HealthConnect
 
 ## Descrição
 O HealthConnect é um sistema simples para agendamento de exames e criação de ficha do paciente. Ele permite que os usuários forneçam informações detalhadas sobre o paciente, agendem exames e armazenem esses dados em um banco de dados SQLite.
