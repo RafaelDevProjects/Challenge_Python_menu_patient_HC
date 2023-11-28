@@ -10,28 +10,32 @@ class Cor:
     ROSA = '\033[95m'
     AZUL = '\033[94m'
 
+
 def limpar_cores(texto_formatado):
     # Remove códigos de cor ANSI
     return re.sub(r'\033\[\d+m', '', texto_formatado)
+
 def imprimir_linha_bonita(msg):
     print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
     print(f"{Cor.ROSA}* {msg} *{Cor.RESET}")
     print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
+
 def imprimir_tabela_tipos_sanguineos():
     print(f"{Cor.CINZA}Tipos Sanguíneos{Cor.RESET}")
     print(f"{Cor.CINZA}--------------------------{Cor.RESET}")
     print(f"{Cor.CINZA}A- | A+ | B+ | B- | AB+ | AB- | O+ | O-{Cor.RESET}")
-
 
 def criar_tabela():
     # Função para criar a tabela no banco de dados
     conn = sqlite3.connect('ficha_paciente.db')
     cursor = conn.cursor()
 
+
+
     # SQL para criar a tabela se ela não existir
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS ficha_paciente (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            cpf TEXT PRIMARY KEY,
             nome TEXT,
             idade INTEGER,
             data_nascimento TEXT,
@@ -58,31 +62,82 @@ def inserir_ficha_no_banco():
     # Limpa a formatação dos dados
     dados_limpos = [re.sub(r'\033\[\d+m', '', dado) for dado in ficha_paciente]
 
-    # Inserindo os dados da ficha do paciente
-    cursor.execute('''
-        INSERT INTO ficha_paciente
-        (nome, idade, data_nascimento, endereco, telefone, sexo, tipo_sanguineo, alergia, saude_cronico, prioritario, exame, data_exame)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (
-        dados_limpos[0],  # Nome
-        dados_limpos[1],  # Idade
-        dados_limpos[2],  # Data de Nascimento
-        dados_limpos[3],  # Endereço
-        dados_limpos[4],  # Telefone
-        dados_limpos[5],  # Sexo
-        dados_limpos[6],  # Tipo Sanguíneo
-        dados_limpos[7],  # Alergia
-        dados_limpos[8],  # Saúde Crônico
-        dados_limpos[9],  # Prioritário
-        dados_limpos[10],  # Exame
-        dados_limpos[11],  # Data do Exame
-    ))
+    # Verificar se já existe um registro com o mesmo CPF
+    cursor.execute('SELECT * FROM ficha_paciente WHERE cpf = ?', (dados_limpos[0],))
+    registro_existente = cursor.fetchone()
+
+    if registro_existente:
+        print(f"Já existe um paciente cadastrado com o CPF {dados_limpos[0]}.")
+
+        # Perguntar se deseja atualizar os dados
+        opcao_atualizar = input("Deseja atualizar os dados? (s/n): ").strip().lower()
+        opcao_atualizar = escolher_opcao(opcao_atualizar[0],['s','n'],"Deseja atualizar os dados? (s/n): ","Digite uma resposta valida!")
+
+        if opcao_atualizar == 's':
+            # Atualizar os dados para o mesmo CPF
+            cursor.execute('''
+                UPDATE ficha_paciente
+                SET nome=?, idade=?, data_nascimento=?, endereco=?, telefone=?, sexo=?, tipo_sanguineo=?,
+                    alergia=?, saude_cronico=?, prioritario=?, exame=?, data_exame=?
+                WHERE cpf=?
+            ''', (
+                dados_limpos[1], dados_limpos[2], dados_limpos[3], dados_limpos[4], dados_limpos[5],
+                dados_limpos[6], dados_limpos[7], dados_limpos[8], dados_limpos[9], dados_limpos[10],
+                dados_limpos[11], dados_limpos[12], dados_limpos[0]
+            ))
+            print("Dados atualizados com sucesso!")
+        else:
+            print("Cadastro não foi atualizado.")
+
+    else:
+        # Inserir os dados da ficha do paciente
+        cursor.execute('''
+            INSERT INTO ficha_paciente
+            (cpf, nome, idade, data_nascimento, endereco, telefone, sexo, tipo_sanguineo, alergia,
+             saude_cronico, prioritario, exame, data_exame)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            dados_limpos[0], dados_limpos[1], dados_limpos[2], dados_limpos[3], dados_limpos[4],
+            dados_limpos[5], dados_limpos[6], dados_limpos[7], dados_limpos[8], dados_limpos[9],
+            dados_limpos[10], dados_limpos[11], dados_limpos[12]
+        ))
+
+        print("Cadastro realizado com sucesso!")
 
     conn.commit()
     conn.close()
 
 
+def validar_cpf(cpf):
+    # Função para validar um CPF
+    cpf = list(map(int, cpf))
 
+    if len(cpf) != 11 or len(set(cpf)) == 1:
+        return False
+
+    # Calcula o primeiro dígito verificador
+    total = 0
+    for i in range(9):
+        total += cpf[i] * (10 - i)
+    resto = total % 11
+    digito_verificador1 = 0 if resto < 2 else 11 - resto
+
+    # Verifica o primeiro dígito verificador
+    if digito_verificador1 != cpf[9]:
+        return False
+
+    # Calcula o segundo dígito verificador
+    total = 0
+    for i in range(10):
+        total += cpf[i] * (11 - i)
+    resto = total % 11
+    digito_verificador2 = 0 if resto < 2 else 11 - resto
+
+    # Verifica o segundo dígito verificador
+    if digito_verificador2 != cpf[10]:
+        return False
+
+    return True
 
 def formata_numero_celular(numero):
     # Remover caracteres não numéricos
@@ -102,14 +157,14 @@ def verifica_telefone(numero):
         print("Formato de número de celular inválido!")
         return None
 
-def verifica_data(data):
+def verifica_data(data):  #verifica o formato de data
     try:
         datetime.strptime(data, '%d-%m-%Y')
         return True
     except ValueError:
         return False
 
-def verifica_data_futura(data):
+def verifica_data_futura(data):  # verifica se é em uma data futura
     try:
         # Converter a string para um objeto datetime
         data_formatada = datetime.strptime(data, '%d-%m-%Y')
@@ -132,11 +187,17 @@ def verifica_num(var, msg, alerta):
         var = input(msg)
     return int(var)
 
-def escolher_opcao(var, lista_opcoes, msg, alerta):
+def escolher_opcao(var, lista_opcoes, msg, alerta):  #função para escolher entre sim ou não
     while var.lower() not in lista_opcoes:
         print(alerta)
         erro = input(msg).strip().lower()
         var = erro[0]
+    return var
+
+def escolher_opcao_lista(var, lista_opcoes, msg, alerta):  #função para escolher entre items de lista
+    while var.lower() not in lista_opcoes:
+        print(alerta)
+        var = input(msg)
     return var
 
 def lista_append(var):
@@ -146,6 +207,7 @@ def imprimir_ficha_completa():
     print(f"{Cor.VERDE}Ficha completa do paciente{Cor.RESET}")
 
     labels = [
+        "CPF",
         "Nome do paciente",
         "Data de nascimento",
         "Endereço",
