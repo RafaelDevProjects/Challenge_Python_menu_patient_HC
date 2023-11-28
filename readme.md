@@ -14,22 +14,16 @@ Não há dependências externas além das bibliotecas padrão do Python.
 
 1. **Clonar o Repositório:**
     ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
+    git clone https://github.com/seu-usuario/gs-python-HealthConnect.git
     cd nome-do-repositorio
     ```
 
-2. **Instalar Dependências (não há neste caso):**
+2. **Executar o Programa:**
     ```bash
-    # Se necessário
-    pip install -r requirements.txt
+    python main.py
     ```
 
-3. **Executar o Programa:**
-    ```bash
-    python nome_do_arquivo.py
-    ```
-
-4. **Funcionalidades do Sistema:**
+3. **Funcionalidades do Sistema:**
     - **Cadastro de Pacientes:**
         - O sistema permite o cadastro de pacientes com informações como nome, CPF, idade, data de nascimento, endereço, telefone, sexo, tipo sanguíneo, alergias, problemas de saúde crônicos, se é prioritário e informações sobre o exame a ser realizado.
 
