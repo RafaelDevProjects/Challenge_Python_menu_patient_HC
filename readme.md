@@ -1,8 +1,8 @@
-<img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="400"/>
+
 
 <img src="imagens/Captura de tela 2023-11-28 153145.jpg" alt="Logo da Minha Aplicação" width="400"/>
 
-
+<img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="100"/>
 
 ## Descrição
 Este projeto consiste em um sistema simples para agendamento de exames e cadastro de pacientes. O sistema utiliza um banco de dados SQLite para armazenar as informações dos pacientes.
