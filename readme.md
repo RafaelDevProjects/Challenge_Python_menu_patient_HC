@@ -1,4 +1,5 @@
-# Sistema de Agendamento e Cadastro de Pacientes
+<img src="imagens/logoHealthConnect.jpg" alt="Logo da Minha Aplicação" width="200"/>
+
 
 ## Descrição
 Este projeto consiste em um sistema simples para agendamento de exames e cadastro de pacientes. O sistema utiliza um banco de dados SQLite para armazenar as informações dos pacientes.
@@ -7,8 +8,6 @@ Este projeto consiste em um sistema simples para agendamento de exames e cadastr
 - Python 3.x
 - SQLite3 (incluso na maioria das instalações padrão do Python)
 
-## Dependências
-Não há dependências externas além das bibliotecas padrão do Python.
 
 ## Instruções de Uso
 
