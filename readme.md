@@ -15,7 +15,7 @@ Este projeto consiste em um sistema simples para agendamento de exames e cadastr
 
 1. **Clonar o Repositório:**
     ```bash
-    git clone https://github.com/seu-usuario/gs-python-HealthConnect.git
+    git clone https://github.com/RafaelDevProjects/gs-python-HealthConnect.git
     cd gs-python-HealthConnect
     ```
 
