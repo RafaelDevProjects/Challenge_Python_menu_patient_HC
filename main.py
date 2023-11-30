@@ -29,14 +29,10 @@ def main():
         nome = input("Nome do paciente:")
         lista_append(nome)
 
-
-
         # pega a idade do paciente
         idade = verifica_num(input("Idade do paciente:"), "Idade do paciente:",
                              "A idade deve ser cadastrada em números inteiros (1, 10, 55, 80 etc...)")
         lista_append(idade)
-
-
 
         # pega a data de nascimento
         while True:
@@ -47,15 +43,9 @@ def main():
                 print("Data de nascimento inválida, deve ser preenchida neste formato: DD-MM-YYYY")
         lista_append(data_nascimento)
 
-
-
-
         # pega o endereço
         endereco = input("Endereço do paciente:")
         lista_append(endereco)
-
-
-
 
         # pega o telefone
         telefone = input("Telefone para contato do paciente ex (dd) 92118-4570:")
