@@ -10,7 +10,6 @@ class Cor:
     ROSA = '\033[95m'
     AZUL = '\033[94m'
 
-
 def limpar_cores(texto_formatado):
     # Remove códigos de cor ANSI
     return re.sub(r'\033\[\d+m', '', texto_formatado)
@@ -106,7 +105,6 @@ def inserir_ficha_no_banco():
 
     conn.commit()
     conn.close()
-
 
 def validar_cpf(cpf):
     # Função para validar um CPF
