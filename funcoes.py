@@ -209,16 +209,16 @@ def imprimir_ficha_completa():
     labels = [
         "CPF",
         "Nome do paciente",
+        "Idade do paciente",
         "Data de nascimento",
         "Endereço",
         "Telefone(cel)",
         "Sexo",
-        "Idade do paciente",
         "Tipo sanguíneo",
         "Alergia",
         "Problema de saúde crônico",
         "Atendimento prioritário",
-        "Periodo de exame",
+        "Tipo de exame",
         "Data de exame"
     ]
 
