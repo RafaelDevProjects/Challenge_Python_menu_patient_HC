@@ -1,6 +1,8 @@
 from datetime import datetime
 import re
 import sqlite3
+import os
+
 
 ficha_paciente = []
 class Cor:
@@ -10,19 +12,26 @@ class Cor:
     ROSA = '\033[95m'
     AZUL = '\033[94m'
 
+
 def limpar_cores(texto_formatado):
     # Remove códigos de cor ANSI
     return re.sub(r'\033\[\d+m', '', texto_formatado)
 
-def imprimir_linha_bonita(msg):
+def imprimir_linha(qnt):
+    print(f'{Cor.ROSA}{"="*qnt}{Cor.RESET}')
+
+
+def imprimir_e_text_linha_bonita(msg):
     print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
     print(f"{Cor.ROSA}* {msg} *{Cor.RESET}")
     print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
+
 
 def imprimir_tabela_tipos_sanguineos():
     print(f"{Cor.CINZA}Tipos Sanguíneos{Cor.RESET}")
     print(f"{Cor.CINZA}--------------------------{Cor.RESET}")
     print(f"{Cor.CINZA}A- | A+ | B+ | B- | AB+ | AB- | O+ | O-{Cor.RESET}")
+
 
 def criar_tabela():
     # Função para criar a tabela no banco de dados
@@ -52,6 +61,7 @@ def criar_tabela():
 
     conn.commit()
     conn.close()
+
 
 def inserir_ficha_no_banco():
     # Função para inserir a ficha do paciente no banco de dados
@@ -106,6 +116,7 @@ def inserir_ficha_no_banco():
     conn.commit()
     conn.close()
 
+
 def validar_cpf(cpf):
     # Função para validar um CPF
     cpf = list(map(int, cpf))
@@ -137,12 +148,14 @@ def validar_cpf(cpf):
 
     return True
 
+
 def formata_numero_celular(numero):
     # Remover caracteres não numéricos
     numero = re.sub(r'\D', '', numero)
 
     # Formatar para (dd) 92118-4570
     return f'({numero[:2]}) {numero[2:7]}-{numero[7:]}'
+
 
 def verifica_telefone(numero):
     # Formatar o número de celular
@@ -155,12 +168,14 @@ def verifica_telefone(numero):
         print("Formato de número de celular inválido!")
         return None
 
+
 def verifica_data(data):  #verifica o formato de data
     try:
         datetime.strptime(data, '%d-%m-%Y')
         return True
     except ValueError:
         return False
+
 
 def verifica_data_futura(data):  # verifica se é em uma data futura
     try:
@@ -179,11 +194,13 @@ def verifica_data_futura(data):  # verifica se é em uma data futura
         print("Formato de data inválido. Deve ser preenchido neste formato: DD-MM-YYYY")
         return False
 
+
 def verifica_num(var, msg, alerta):
     while not var.isnumeric():
         print(alerta)
         var = input(msg)
     return int(var)
+
 
 def escolher_opcao(var, lista_opcoes, msg, alerta):  #função para escolher entre sim ou não
     while var.lower() not in lista_opcoes:
@@ -192,14 +209,17 @@ def escolher_opcao(var, lista_opcoes, msg, alerta):  #função para escolher ent
         var = erro[0]
     return var
 
+
 def escolher_opcao_lista(var, lista_opcoes, msg, alerta):  #função para escolher entre items de lista
     while var.lower() not in lista_opcoes:
         print(alerta)
         var = input(msg)
     return var
 
+
 def lista_append(var):
     ficha_paciente.append(f"{Cor.VERDE}{var}{Cor.RESET}")
+
 
 def imprimir_ficha_completa():
     print(f"{Cor.VERDE}Ficha completa do paciente{Cor.RESET}")
@@ -222,3 +242,10 @@ def imprimir_ficha_completa():
 
     for label, valor in zip(labels, ficha_paciente):
         print(f"{Cor.CINZA}{label}:{Cor.RESET} {valor}")
+
+def limpa_console():
+    # Verifica o sistema operacional
+    if os.name == 'posix': # Unix/Linux/MacOS
+        os.system('clear')
+    elif os.name == 'nt': # Windows
+        os.system('cls')

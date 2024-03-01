@@ -2,131 +2,67 @@ from datetime import datetime
 import re
 import sqlite3
 from funcoes import *
+from funcoes_main import *
 
 
 def main():
     while True:
-        imprimir_linha_bonita("agendamento de exame e ficha do paciente")
-
-
+        print("""
+█▀▀█ █▀▀▀ █▀▀ █▀▀▄ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ 　 █▀▀▄ █▀▀█ 　 █▀▀ █░█ █▀▀█ █▀▄▀█ █▀▀ 
+█▄▄█ █░▀█ █▀▀ █░░█ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ █░░█ 　 █░░█ █░░█ 　 █▀▀ ▄▀▄ █▄▄█ █░▀░█ █▀▀ 
+▀░░▀ ▀▀▀▀ ▀▀▀ ▀░░▀ ▀▀▀░ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ ▀▀▀▀ 　 ▀▀▀░ ▀▀▀▀ 　 ▀▀▀ ▀░▀ ▀░░▀ ▀░░░▀ ▀▀▀""")
+        
+        imprimir_linha(93)
+        
         global ficha_paciente
         ficha_paciente = []
 
-
-
-
         #pega CPF do paciente
-        cpf = input("CPF do paciente:")
-        while len(cpf) != 11 or not cpf.isdigit() or not validar_cpf(cpf):
-            print("CPF inválido. Deve conter 11 dígitos numéricos e ser válido.")
-            cpf = input("CPF do paciente:")
-
+        cpf = pega_cpf()
         lista_append(cpf)
-
-
 
         # pega o nome do paciente
         nome = input("Nome do paciente:")
         lista_append(nome)
 
         # pega a idade do paciente
-        idade = verifica_num(input("Idade do paciente:"), "Idade do paciente:",
-                             "A idade deve ser cadastrada em números inteiros (1, 10, 55, 80 etc...)")
+        idade = pega_idade()
         lista_append(idade)
 
         # pega a data de nascimento
-        while True:
-            data_nascimento = input("Data de nascimento do paciente DD-MM-YYYY:")
-            if verifica_data(data_nascimento):
-                break
-            else:
-                print("Data de nascimento inválida, deve ser preenchida neste formato: DD-MM-YYYY")
+        data_nascimento = pega_data_nascimento()
         lista_append(data_nascimento)
 
         # pega o endereço
         endereco = input("Endereço do paciente:")
         lista_append(endereco)
 
-        # pega o telefone
-        telefone = input("Telefone para contato do paciente ex (dd) 92118-4570:")
-        telefone_formatado = verifica_telefone(telefone)
-        while telefone_formatado is None:
-            telefone = input("Telefone para contato do paciente (dd) 92118-4570:")
-            telefone_formatado = verifica_telefone(telefone)
+        # pega o telefone ja formatado
+        telefone_formatado = pega_telefone()
         lista_append(telefone_formatado)
 
-
-
-
         # Sexo do Paciente
-        lista_sexo = ["m", "f"]
-        opcao_sexo = input("Sexo do paciente <f/m> :").strip().lower()
-        sexo = escolher_opcao(opcao_sexo[0], lista_sexo, "Sexo do paciente:",
-                              f"O sexo deve ser uma opção válida ex:{lista_sexo}")
+        sexo = pega_sexo()
         lista_append(sexo)
-
-
-
-
+    
         # pega o tipo sanguíneo
-        imprimir_tabela_tipos_sanguineos()
-        lista_sangue = ["a-", "a+", "b+", "b-", "ab+", "ab-", "o+", "o-"]
-        tipo_sanguineo = escolher_opcao_lista(input("Tipo Sanguíneo do paciente:"), lista_sangue,
-                                        "Tipo Sanguíneo do paciente:",
-                                        f"O tipo sanguíneo deve ser uma opção existente ex:{lista_sangue}")
+        tipo_sanguineo = pega_tipo_sanguineo()
         lista_append(tipo_sanguineo)
 
-
-
-
         # pergunta se o paciente tem alergia
-        opcao_alergia = input("O paciente tem alguma alergia?").strip().lower()
-        opcao_alergia = escolher_opcao(opcao_alergia[0], ["s", "n"], "O paciente tem alguma alergia?",
-                                       "Digite uma resposta válida!")
-        if opcao_alergia == "s":
-            alergia = input("Qual?")
-        else:
-            alergia = "vazio"
+        alergia = pega_alergia()
         lista_append(alergia)
 
-
-
-
         # pergunta se tem problema crônico
-        opcao_saude_cronico = input("O paciente tem algum problema de saúde crônico?").strip().lower()
-        opcao_saude_cronico = escolher_opcao(opcao_saude_cronico[0], ["s", "n"],"O paciente tem algum problema de saúde crônico?","Digite uma resposta válida!")
-
-        if opcao_saude_cronico == "s":
-            saude_cronico = input("Qual?")
-        else:
-            saude_cronico = "vazio"
+        saude_cronico = pega_doenca_cronica()
         lista_append(saude_cronico)
 
-
-
-
         # pergunta se é prioritário
-        lista_prioritario = ["pcd", "idoso", "gestante"]
-        opcao_prioridade = input("O paciente é prioritário?").strip().lower()
-        opcao_prioridade = escolher_opcao(opcao_prioridade[0], ["s", "n"],
-                                          "O paciente é prioritário?", "Digite uma resposta válida!")
-        if opcao_prioridade == "s":
-            prioritario = escolher_opcao_lista(input(f"Qual das categorias ({', '.join(lista_prioritario)}): "),
-                                          lista_prioritario,
-                                          f"Qual das categorias ({', '.join(lista_prioritario)}):",
-                                          f'A opção deve ser uma destas: {", ".join(lista_prioritario)}')
-        else:
-            prioritario = "vazio"
+        prioritario = pega_prioritario()
         lista_append(prioritario)
 
-
-
-
         # pergunta o exame que ele irá fazer
-        lista_exames = ["raio-x", "ultrassom", "tomografia", "ressonancia", "ecocardiograma"]
-        exame = escolher_opcao_lista(input(f"Exame que deseja realizar ({', '.join(lista_exames)}): "), lista_exames,
-                                f"Exame que deseja realizar ({', '.join(lista_exames)}):",
-                                "Escolha entre uma das opções apresentadas!")
+        exame = pega_exame()
         lista_append(exame)
 
 
