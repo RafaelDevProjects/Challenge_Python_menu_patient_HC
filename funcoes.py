@@ -243,9 +243,3 @@ def imprimir_ficha_completa():
     for label, valor in zip(labels, ficha_paciente):
         print(f"{Cor.CINZA}{label}:{Cor.RESET} {valor}")
 
-def limpa_console():
-    # Verifica o sistema operacional
-    if os.name == 'posix': # Unix/Linux/MacOS
-        os.system('clear')
-    elif os.name == 'nt': # Windows
-        os.system('cls')

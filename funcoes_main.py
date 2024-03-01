@@ -42,18 +42,19 @@ def pega_tipo_sanguineo():
     imprimir_tabela_tipos_sanguineos()
     lista_sangue = ["a-", "a+", "b+", "b-", "ab+", "ab-", "o+", "o-"]
     tipo_sanguineo = escolher_opcao_lista(input("Tipo Sanguíneo do paciente:"), lista_sangue,"Tipo Sanguíneo do paciente:", f"O tipo sanguíneo deve ser uma opção existente ex:{lista_sangue}")
+    return tipo_sanguineo
 
 
 def pega_alergia():
     opcao_alergia = input("O paciente tem alguma alergia?").strip().lower()
-    opcao_alergia = escolher_opcao(opcao_alergia[0], ["s", "n"], "O paciente tem alguma alergia?",
-                                    "Digite uma resposta válida!")
+    opcao_alergia = escolher_opcao(opcao_alergia[0], ["s", "n"], "O paciente tem alguma alergia?", "Digite uma resposta válida!")
     if opcao_alergia == "s":
         alergia = input("Qual?")
     else:
-        alergia = "vazio"
+        alergia = "não possui"
 
     return alergia
+
 
 def pega_doenca_cronica():
     opcao_saude_cronico = input("O paciente tem algum problema de saúde crônico?").strip().lower()
@@ -62,9 +63,10 @@ def pega_doenca_cronica():
     if opcao_saude_cronico == "s":
         saude_cronico = input("Qual?")
     else:
-        saude_cronico = "vazio"
+        saude_cronico = "não possui"
     
     return saude_cronico
+
 
 def pega_prioritario():
     lista_prioritario = ["pcd", "idoso", "gestante"]
@@ -74,11 +76,35 @@ def pega_prioritario():
     if opcao_prioridade == "s":
         prioritario = escolher_opcao_lista(input(f"Qual das categorias ({', '.join(lista_prioritario)}): "), lista_prioritario,f"Qual das categorias ({', '.join(lista_prioritario)}):",f'A opção deve ser uma destas: {", ".join(lista_prioritario)}')
     else:
-        prioritario = "vazio"
+        prioritario = "não prioritario"
 
     return prioritario
+
 
 def pega_exame():
     lista_exames = ["raio-x", "ultrassom", "tomografia", "ressonancia", "ecocardiograma"]
     exame = escolher_opcao_lista(input(f"Exame que deseja realizar ({', '.join(lista_exames)}): "), lista_exames, f"Exame que deseja realizar ({', '.join(lista_exames)}):", "Escolha entre uma das opções apresentadas!")
+    return exame
+
+
+def pega_data_exame():
+    while True:
+        data_exame = input("Data para realização do exame DD-MM-YYYY:")
+        if verifica_data_futura(data_exame):
+            print("Agendamento realizado com sucesso!")
+            return data_exame
+            break
+        else:
+            print("Data inválida, deve ser preenchido neste formato: DD-MM-YYYY (dia-mês-ano).")
+
+
+def limpar_console():
+    """
+    Limpa o console do usuário.
+    """
+    if os.name == 'posix': # Unix/Linux/MacOS
+        os.system('clear')
+    elif os.name == 'nt': # Windows
+        os.system('cls')
+
     
