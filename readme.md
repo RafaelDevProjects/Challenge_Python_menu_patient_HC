@@ -1,6 +1,5 @@
 
 
-<img src="imagens/Captura de tela 2023-11-28 153145.jpg" alt="Logo da Minha Aplicação" width="500"/>
 
 
 ## Descrição
@@ -15,7 +14,7 @@ Este projeto consiste em um sistema simples para agendamento de exames e cadastr
 
 1. **Clonar o Repositório:**
     ```bash
-    git clone https://github.com/RafaelDevProjects/gs-python-HealthConnect.git
+    git clone https://github.com/RafaelDevProjects/Challenge_Python_menu_patient_HC.git
     cd gs-python-HealthConnect
     ```
 
@@ -43,12 +42,6 @@ Este projeto consiste em um sistema simples para agendamento de exames e cadastr
     - **Encerramento do Programa:**
         - Ao não querer cadastrar mais pacientes, o programa encerra, e você verá a mensagem "Programa encerrado."
 
-
-## Autores
-| Nome do Autor | RM |
-|---------------|--------|
-| Rafael de Almeida    | 554019 |
-| Lucca    | 553678 |
 
 ## Contribuição
 Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar pull requests.
