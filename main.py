@@ -7,6 +7,7 @@ from funcoes_main import *
 
 def main():
     while True:
+        limpar_console()
         print("""
 █▀▀█ █▀▀▀ █▀▀ █▀▀▄ █▀▀▄ █▀▀█ █▀▄▀█ █▀▀ █▀▀▄ ▀▀█▀▀ █▀▀█ 　 █▀▀▄ █▀▀█ 　 █▀▀ █░█ █▀▀█ █▀▄▀█ █▀▀ 
 █▄▄█ █░▀█ █▀▀ █░░█ █░░█ █▄▄█ █░▀░█ █▀▀ █░░█ ░░█░░ █░░█ 　 █░░█ █░░█ 　 █▀▀ ▄▀▄ █▄▄█ █░▀░█ █▀▀ 
@@ -73,8 +74,8 @@ def main():
         criar_tabela()  # Certifica-se de que a tabela existe no banco de dado
         inserir_ficha_no_banco()  # Insere a ficha do paciente no banco de dados
 
-        limpa_console()
-        
+        limpar_console()
+    
         imprimir_ficha_completa()
         print(f"Muito Obrigado por utilizar os serviços da {Cor.ROSA}Healt{Cor.RESET}{Cor.AZUL}Connect{Cor.RESET}")
 

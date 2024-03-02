@@ -222,7 +222,8 @@ def lista_append(var):
 
 
 def imprimir_ficha_completa():
-    print(f"{Cor.VERDE}Ficha completa do paciente{Cor.RESET}")
+    print(f"{Cor.VERDE}𝙛𝙞𝙘𝙝𝙖 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙖 𝙙𝙤 𝙥𝙖𝙘𝙞𝙚𝙣𝙩𝙚{Cor.RESET}")
+    print()
 
     labels = [
         "CPF",
