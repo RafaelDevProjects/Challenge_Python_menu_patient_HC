@@ -81,7 +81,7 @@ def main():
         limpar_console()
     
         imprimir_ficha_completa()
-        print(f"Muito Obrigado por utilizar os serviços da {Cor.ROSA}Healt{Cor.RESET}{Cor.AZUL}Connect{Cor.RESET}")
+        print(f"Muito Obrigado por utilizar os serviços do {Cor.AZUL}HC{Cor.RESET}")
 
 
         #Pergunta ao usuário se ele quer cadastrar mais alguém.
