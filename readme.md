@@ -15,7 +15,6 @@ Este projeto consiste em um sistema simples para agendamento de exames e cadastr
 1. **Clonar o Repositório:**
     ```bash
     git clone https://github.com/RafaelDevProjects/Challenge_Python_menu_patient_HC.git
-    cd gs-python-HealthConnect
     ```
 
 2. **Executar o Programa:**
