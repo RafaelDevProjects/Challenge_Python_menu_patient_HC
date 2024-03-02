@@ -14,9 +14,11 @@ def main():
 ▀░░▀ ▀▀▀▀ ▀▀▀ ▀░░▀ ▀▀▀░ ▀░░▀ ▀░░░▀ ▀▀▀ ▀░░▀ ░░▀░░ ▀▀▀▀ 　 ▀▀▀░ ▀▀▀▀ 　 ▀▀▀ ▀░▀ ▀░░▀ ▀░░░▀ ▀▀▀""")
         
         imprimir_linha(93)
+
         
         global ficha_paciente
         ficha_paciente = []
+
 
         #pega CPF do paciente
         cpf = pega_cpf()
@@ -45,7 +47,8 @@ def main():
         # Sexo do Paciente
         sexo = pega_sexo()
         lista_append(sexo)
-    
+
+        #Informações medicas
         # pega o tipo sanguíneo
         tipo_sanguineo = pega_tipo_sanguineo()
         lista_append(tipo_sanguineo)
@@ -62,6 +65,7 @@ def main():
         prioritario = pega_prioritario()
         lista_append(prioritario)
 
+        #Agendar o exame
         # pergunta o exame que ele irá fazer
         exame = pega_exame()
         lista_append(exame)
@@ -82,7 +86,7 @@ def main():
 
         #Pergunta ao usuário se ele quer cadastrar mais alguém.
         opcao_cadastrar_mais = input('Deseja Cadastrar mais uma pessoa? ').strip().lower()
-        opcao_cadastrar_mais = escolher_opcao(opcao_cadastrar_mais[0],["s", "n"], 'Deseja Cadastrar mais uma pessoa? ', "Digite uma resposta valida!!" )
+        opcao_cadastrar_mais = escolher_opcao(opcao_cadastrar_mais[0],["s", "n"], 'Deseja Cadastrar mais uma pessoa? ', f"{Cor.CINZA_CLARO}Digite uma resposta valida!!{Cor.RESET}" )
         if opcao_cadastrar_mais != "s":
             print("Programa encerrado.")
             break

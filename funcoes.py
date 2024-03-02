@@ -11,6 +11,7 @@ class Cor:
     VERDE = '\033[36m'
     ROSA = '\033[95m'
     AZUL = '\033[94m'
+    CINZA_CLARO = '\033[90m'
 
 
 def limpar_cores(texto_formatado):
@@ -28,17 +29,15 @@ def imprimir_e_text_linha_bonita(msg):
 
 
 def imprimir_tabela_tipos_sanguineos():
-    print(f"{Cor.CINZA}Tipos Sanguíneos{Cor.RESET}")
-    print(f"{Cor.CINZA}--------------------------{Cor.RESET}")
-    print(f"{Cor.CINZA}A- | A+ | B+ | B- | AB+ | AB- | O+ | O-{Cor.RESET}")
+    print(f"{Cor.AZUL}Tipos Sanguíneos{Cor.RESET}")
+    print(f"{Cor.AZUL}--------------------------{Cor.RESET}")
+    print(f"{Cor.AZUL}A- | A+ | B+ | B- | AB+ | AB- | O+ | O-{Cor.RESET}")
 
 
 def criar_tabela():
     # Função para criar a tabela no banco de dados
     conn = sqlite3.connect('ficha_paciente.db')
     cursor = conn.cursor()
-
-
 
     # SQL para criar a tabela se ela não existir
     cursor.execute('''
@@ -80,7 +79,7 @@ def inserir_ficha_no_banco():
 
         # Perguntar se deseja atualizar os dados
         opcao_atualizar = input("Deseja atualizar os dados? (s/n): ").strip().lower()
-        opcao_atualizar = escolher_opcao(opcao_atualizar[0],['s','n'],"Deseja atualizar os dados? (s/n): ","Digite uma resposta valida!")
+        opcao_atualizar = escolher_opcao(opcao_atualizar[0],['s','n'],"Deseja atualizar os dados? (s/n): ",f'{Cor.CINZA}Digite uma resposta valida!{Cor.RESET}')
 
         if opcao_atualizar == 's':
             # Atualizar os dados para o mesmo CPF
@@ -165,7 +164,7 @@ def verifica_telefone(numero):
     if re.match(r'^\(\d{2}\) \d{5}-\d{4}$', numero_formatado):
         return numero_formatado
     else:
-        print("Formato de número de celular inválido!")
+        print(f"{Cor.CINZA_CLARO}Formato de número de celular inválido!{Cor.RESET}")
         return None
 
 
@@ -187,11 +186,11 @@ def verifica_data_futura(data):  # verifica se é em uma data futura
         if data_formatada > data_atual:
             return True
         else:
-            print("A data deve ser no futuro.")
+            print(f"{Cor.CINZA_CLARO}Deve ser uma data futura. Tente novamente!{Cor.RESET}")
             return False
 
     except ValueError:
-        print("Formato de data inválido. Deve ser preenchido neste formato: DD-MM-YYYY")
+        print(f"{Cor.CINZA}Formato de data inválido. Deve ser preenchido neste formato: DD-MM-YYYY{Cor.RESET}")
         return False
 
 
