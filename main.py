@@ -1,8 +1,8 @@
 from datetime import datetime
 import re
 import sqlite3
-from funcoes import *
-from funcoes_main import *
+from func.funcoes import *
+from func.funcoes_main import *
 
 
 def main():

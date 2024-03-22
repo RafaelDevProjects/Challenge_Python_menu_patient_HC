@@ -1,7 +1,7 @@
 from datetime import datetime
 import re
 import sqlite3
-from funcoes import *
+from func.funcoes import *
 
 def pega_cpf():
     cpf = input("CPF do paciente:")
