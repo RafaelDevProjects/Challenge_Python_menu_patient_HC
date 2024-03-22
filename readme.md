@@ -1,47 +1,67 @@
 
 
+# Hospital das Clínicas - Sistema de Cadastro de Pacientes
+
+Este é um projeto em Python desenvolvido para o Hospital das Clínicas, que visa facilitar o cadastro de pacientes de forma organizada e eficiente.
+
+## Funcionalidades
+
+O projeto oferece as seguintes funcionalidades:
+
+1. **Cadastro de Pacientes:** Permite o registro de informações dos pacientes, como CPF, idade, data de nascimento, telefone, sexo, tipo sanguíneo, alergias, doenças crônicas, prioridade e agendamento de exames.
+
+2. **Validação de Dados:** Garante que as informações inseridas sejam válidas, como CPF, data de nascimento, telefone, entre outros.
+
+3. **Limpeza de Console:** Função para limpar o console do usuário, proporcionando uma melhor experiência de uso.
 
 
-## Descrição
-Este projeto consiste em um sistema simples para agendamento de exames e cadastro de pacientes. O sistema utiliza um banco de dados SQLite para armazenar as informações dos pacientes.
+## Funcionalidades Detalhadas
+
+1. **Cadastro de Pacientes:**
+   - O sistema permite o registro completo das informações dos pacientes, incluindo dados como CPF, idade, data de nascimento, telefone, sexo, tipo sanguíneo, alergias, doenças crônicas e prioridade.
+   - Esses dados são essenciais para garantir um acompanhamento adequado do paciente e para que a equipe médica tenha acesso rápido a informações relevantes durante o atendimento.
+
+2. **Validação de Dados:**
+   - Antes de aceitar as informações inseridas pelo usuário, o sistema realiza validações para garantir que os dados estejam corretos e consistentes.
+   - Por exemplo, verifica-se se o CPF possui o formato correto e se é um número válido, se a data de nascimento está no formato esperado e se é uma data válida, se o número de telefone possui a formatação adequada, entre outras validações.
+
+3. **Agendamento de Exames:**
+   - Além do cadastro básico do paciente, o sistema também permite o agendamento de exames.
+   - O usuário pode escolher o tipo de exame que deseja realizar a partir de uma lista pré-definida, como raio-x, ultrassom, tomografia, entre outros.
+   - O sistema também solicita a data desejada para realização do exame, garantindo uma melhor organização e planejamento das atividades do hospital.
+
+4. **Priorização de Atendimento:**
+   - Uma funcionalidade importante é a capacidade de identificar pacientes prioritários, como pessoas com deficiência (PCD), idosos ou gestantes.
+   - Isso permite que a equipe médica priorize o atendimento desses pacientes, garantindo que recebam a assistência necessária de forma mais rápida e eficiente.
+
+5. **Limpeza de Console:**
+   - Uma pequena, mas útil funcionalidade, é a capacidade de limpar o console do usuário.
+   - Isso proporciona uma interface mais limpa e organizada, melhorando a experiência do usuário durante a interação com o sistema.
 
 ## Requisitos
+
 - Python 3.x
-- SQLite3 (incluso na maioria das instalações padrão do Python)
+- Biblioteca SQLite3 (já integrada no Python 3.x)
 
+## Como Usar
 
-## Instruções de Uso
-
-1. **Clonar o Repositório:**
+1. **Clone este repositório em seu ambiente local:**
     ```bash
     git clone https://github.com/RafaelDevProjects/Challenge_Python_menu_patient_HC.git
     ```
 
-2. **Executar o Programa:**
+2. **Execute o arquivo `main.py` para iniciar o programa:**
     ```bash
     python main.py
     ```
 
-3. **Funcionalidades do Sistema:**
-    - **Cadastro de Pacientes:**
-        - O sistema permite o cadastro de pacientes com informações como nome, CPF, idade, data de nascimento, endereço, telefone, sexo, tipo sanguíneo, alergias, problemas de saúde crônicos, se é prioritário e informações sobre o exame a ser realizado.
+3. Siga as instruções fornecidas pelo programa para realizar o cadastro de pacientes.
 
-    - **Validação de CPF:**
-        - Antes de inserir no banco de dados, o sistema valida se o CPF informado é válido.
+## Contribuindo
 
-    - **Prevenção de CPFs Duplicados:**
-        - O sistema verifica se já existe um paciente com o mesmo CPF no banco de dados antes de inserir os dados. Se o CPF já estiver cadastrado, o sistema informa ao usuário e oferece a opção de atualizar as informações existentes.
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias, correções de bugs ou novas funcionalidades.
 
-    - **Banco de Dados SQLite:**
-        - Os dados dos pacientes são armazenados em um banco de dados SQLite chamado `ficha_paciente.db`.
+## Licença
 
-    - **Iteração com o Usuário:**
-        - O sistema guia o usuário por meio de perguntas interativas para coletar as informações do paciente.
-
-    - **Encerramento do Programa:**
-        - Ao não querer cadastrar mais pacientes, o programa encerra, e você verá a mensagem "Programa encerrado."
-
-
-## Contribuição
-Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) ou enviar pull requests.
+Este projeto está licenciado sob a Licença MIT.
 
