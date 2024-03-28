@@ -23,10 +23,10 @@ def pega_data_nascimento():
             print(f"{Cor.CINZA_CLARO}Data de nascimento inválida, deve ser preenchida neste formato: DD-MM-YYYY{Cor.RESET}")
 
 def pega_telefone():
-    telefone = input("Telefone para contato do paciente. (Exemplo: (dd) xxxxx-xxxx)")
+    telefone = input("Telefone para contato do paciente. (Exemplo: (dd) xxxxx-xxxx): ")
     telefone_formatado = verifica_telefone(telefone)
     while telefone_formatado is None:
-        telefone = input("Telefone para contato do paciente. (Exemplo: (dd) xxxxx-xxxx):")
+        telefone = input("Telefone para contato do paciente. (Exemplo: (dd) xxxxx-xxxx): ")
         telefone_formatado = verifica_telefone(telefone)
     return telefone_formatado
 
