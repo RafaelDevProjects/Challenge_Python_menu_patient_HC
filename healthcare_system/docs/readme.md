@@ -4,16 +4,6 @@
 
 Este é um projeto em Python desenvolvido para o Hospital das Clínicas, que visa facilitar o cadastro de pacientes de forma organizada e eficiente.
 
-## Funcionalidades
-
-O projeto oferece as seguintes funcionalidades:
-
-1. **Cadastro de Pacientes:** Permite o registro de informações dos pacientes, como CPF, idade, data de nascimento, telefone, sexo, tipo sanguíneo, alergias, doenças crônicas, prioridade e agendamento de exames.
-
-2. **Validação de Dados:** Garante que as informações inseridas sejam válidas, como CPF, data de nascimento, telefone, entre outros.
-
-3. **Limpeza de Console:** Função para limpar o console do usuário, proporcionando uma melhor experiência de uso.
-
 
 ## Funcionalidades Detalhadas
 
@@ -34,9 +24,41 @@ O projeto oferece as seguintes funcionalidades:
    - Uma funcionalidade importante é a capacidade de identificar pacientes prioritários, como pessoas com deficiência (PCD), idosos ou gestantes.
    - Isso permite que a equipe médica priorize o atendimento desses pacientes, garantindo que recebam a assistência necessária de forma mais rápida e eficiente.
 
-5. **Limpeza de Console:**
-   - Uma pequena, mas útil funcionalidade, é a capacidade de limpar o console do usuário.
-   - Isso proporciona uma interface mais limpa e organizada, melhorando a experiência do usuário durante a interação com o sistema.
+## Integração com o Banco de Dados
+
+Este projeto utiliza um banco de dados SQLite para armazenar as informações dos pacientes e facilitar o gerenciamento das fichas médicas. A integração com o banco de dados permite que as informações sejam armazenadas de forma persistente, permitindo recuperação e atualização posterior.
+
+### Estrutura do Banco de Dados
+O banco de dados possui uma tabela chamada ficha_paciente, que contém os seguintes campos:
+
+- cpf: CPF do paciente (chave primária)
+- nome: Nome do paciente
+- idade: Idade do paciente
+- data_nascimento: Data de nascimento do paciente 
+- endereco: Endereço do paciente
+-  telefone: Número de telefone do paciente
+-  sexo: Sexo do paciente
+-  tipo_sanguineo: Tipo sanguíneo do paciente
+-  alergia: Alergias do paciente
+-  saude_cronico: Problemas de saúde crônicos do paciente
+-  prioritario: Indicação de atendimento prioritário do paciente
+-  exame: Tipo de exame agendado para o paciente
+-  data_exame: Data do exame agendado para o paciente
+
+### Operações no Banco de Dados
+As principais operações realizadas no banco de dados são:
+
+- Cadastro de Paciente: Ao cadastrar um novo paciente, suas informações são inseridas na tabela ficha_paciente.
+- Atualização de Dados: Caso um paciente já exista no banco de dados, é possível atualizar suas informações, como endereço, telefone, etc.
+- Consulta de Pacientes: É possível consultar as informações de todos os pacientes cadastrados no banco de dados.
+- Agendamento de Exames: O sistema permite agendar exames para os pacientes, armazenando os detalhes do exame na tabela ficha_paciente.
+
+### Conexão com o Banco de Dados
+A conexão com o banco de dados é feita utilizando a biblioteca SQLite3 do Python. Os arquivos de banco de dados são criados na pasta data do projeto e são manipulados por meio de funções definidas no arquivo database.py.
+
+Para mais detalhes sobre a estrutura do banco de dados e as operações disponíveis, consulte o código-fonte do projeto e a documentação das funções relacionadas ao banco de dados.
+
+
 
 ## Requisitos
 
@@ -57,11 +79,16 @@ O projeto oferece as seguintes funcionalidades:
 
 3. Siga as instruções fornecidas pelo programa para realizar o cadastro de pacientes.
 
-## Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request com melhorias, correções de bugs ou novas funcionalidades.
+## Nome e RM dos desenvolvedores do projeto
 
-## Licença
+Nome: Rafael de Almeida Sigoli RM: 554019 
 
-Este projeto está licenciado sob a Licença MIT.
+Nome: João Victor Seixos Flaitt RM: 553888 
+
+Nome: Lucca Enrico Zanelato Calsolari RM: 553678 
+
+Nome: Lucas Bertolassi Iori  RM: 553183
+
+Nome: Miguel RM: 553009
 
