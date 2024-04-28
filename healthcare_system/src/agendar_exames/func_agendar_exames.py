@@ -42,11 +42,14 @@ def pega_telefone():
 
 
 def pega_sexo():
-    lista_sexo = ["m", "f"]
-    opcao_sexo = input("Sexo do paciente <f/m> :").strip().lower()
-    sexo = escolher_opcao(opcao_sexo[0], lista_sexo, "Sexo do paciente:",
-                          f"{Cor.CINZA_CLARO}O sexo deve ser uma opção válida. F/M: {Cor.RESET}")
-    return sexo
+    while True:
+        opcao_sexo = input("Sexo do paciente [m/f]: ").strip().lower()
+        if not opcao_sexo:
+            print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+            continue
+        sexo = escolher_opcao(opcao_sexo[0], ['m', 'f'], "Sexo do paciente: [m/f] ",
+                              f"{Cor.CINZA_CLARO}Digite uma opção válida!{Cor.RESET}")
+        return sexo
 
 
 def pega_tipo_sanguineo():
@@ -59,44 +62,65 @@ def pega_tipo_sanguineo():
 
 
 def pega_alergia():
-    opcao_alergia = input("O paciente tem alguma alergia?").strip().lower()
-    opcao_alergia = escolher_opcao(opcao_alergia[0], ["s", "n"], "O paciente tem alguma alergia?",
-                                   f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
-    if opcao_alergia == "s":
-        alergia = input("Qual?")
-    else:
-        alergia = "não possui"
+    while True:
+        try:
+            opcao_alergia = input("O paciente tem alguma alergia? ").strip().lower()
+            if not opcao_alergia:
+                print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+                continue
+            opcao_alergia = escolher_opcao(opcao_alergia[0], ["s", "n"], "O paciente tem alguma alergia?",
+                                           f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
+            if opcao_alergia == "s":
+                alergia = input("Qual?")
+            else:
+                alergia = "não possui"
 
-    return alergia
+            return alergia
+        except IndexError:
+            print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
 
 
 def pega_doenca_cronica():
-    opcao_saude_cronico = input("O paciente tem algum problema de saúde crônico?").strip().lower()
-    opcao_saude_cronico = escolher_opcao(opcao_saude_cronico[0], ["s", "n"],
-                                         "O paciente tem algum problema de saúde crônico?",
-                                         f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
+    while True:
+        try:
+            opcao_saude_cronico = input("O paciente tem algum problema de saúde crônico? ").strip().lower()
+            if not opcao_saude_cronico:
+                print(F"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+                continue
+            opcao_saude_cronico = escolher_opcao(opcao_saude_cronico[0], ["s", "n"],
+                                                 "O paciente tem algum problema de saúde crônico?",
+                                                 f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
+            if opcao_saude_cronico == "s":
+                saude_cronico = input("Qual?")
+            else:
+                saude_cronico = "não possui"
 
-    if opcao_saude_cronico == "s":
-        saude_cronico = input("Qual?")
-    else:
-        saude_cronico = "não possui"
-
-    return saude_cronico
+            return saude_cronico
+        except IndexError:
+            print(F"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
 
 
 def pega_prioritario():
     lista_prioritario = ["pcd", "idoso", "gestante"]
-    opcao_prioridade = input("O paciente é prioritário?").strip().lower()
-    opcao_prioridade = escolher_opcao(opcao_prioridade[0], ["s", "n"], "O paciente é prioritário?",
-                                      f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
-    if opcao_prioridade == "s":
-        prioritario = escolher_opcao_lista(input(f"Qual das categorias ({', '.join(lista_prioritario)}): "),
-                                           lista_prioritario, f"Qual das categorias ({', '.join(lista_prioritario)}):",
-                                           f'{Cor.CINZA_CLARO}A opção deve ser uma destas: {", ".join(lista_prioritario)}{Cor.RESET}')
-    else:
-        prioritario = "não prioritario"
+    while True:
+        try:
+            opcao_prioridade = input("O paciente é prioritário? ").strip().lower()
+            if not opcao_prioridade:
+                print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+                continue
+            opcao_prioridade = escolher_opcao(opcao_prioridade[0], ["s", "n"], "O paciente é prioritário?",
+                                               f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
+            if opcao_prioridade == "s":
+                prioritario = escolher_opcao_lista(input(f"Qual das categorias ({', '.join(lista_prioritario)}): "),
+                                                    lista_prioritario,
+                                                    f"Qual das categorias ({', '.join(lista_prioritario)}):",
+                                                    f'{Cor.CINZA_CLARO}A opção deve ser uma destas: {", ".join(lista_prioritario)}{Cor.RESET}')
+            else:
+                prioritario = "não prioritario"
 
-    return prioritario
+            return prioritario
+        except IndexError:
+            print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
 
 
 def pega_exame():

@@ -78,9 +78,21 @@ def agendar_exame():
         print()
 
         # Pergunta ao usuário se ele quer cadastrar mais alguém.
-        opcao_cadastrar_mais = input('Deseja Cadastrar mais uma pessoa? ').strip().lower()
-        opcao_cadastrar_mais = escolher_opcao(opcao_cadastrar_mais[0], ["s", "n"], 'Deseja Cadastrar mais uma pessoa? ',
-                                              f"{Cor.CINZA_CLARO}Digite uma resposta valida!!{Cor.RESET}")
-        if opcao_cadastrar_mais != "s":
-            print(f"{Cor.CINZA_CLARO}Saindo da área de agendamento...{Cor.RESET}{'\n' * 5}")
+        while True:
+            try:
+                opcao_cadastrar_mais = input("Deseja cadastrar mais uma pessoa? (s/n): ").strip().lower()
+                if not opcao_cadastrar_mais:
+                    print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+                    continue
+                opcao_cadastrar_mais = escolher_opcao(opcao_cadastrar_mais[0], ["s", "n"],
+                                                      "Deseja cadastrar mais uma pessoa? (s/n): ",
+                                                      f"{Cor.CINZA_CLARO}Digite uma resposta válida!{Cor.RESET}")
+                if opcao_cadastrar_mais == "n":
+                    print(f"{Cor.CINZA_CLARO}Saindo da área de agendamento...{Cor.RESET}{'\n' * 5}")
+                    break
+                elif opcao_cadastrar_mais == "s":
+                    break
+            except IndexError:
+                print(f"{Cor.CINZA_CLARO}Por favor, digite uma opção válida.{Cor.RESET}")
+        if opcao_cadastrar_mais == "n":
             break
