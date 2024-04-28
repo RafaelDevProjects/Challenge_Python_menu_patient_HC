@@ -1,6 +1,7 @@
 import re
 import sqlite3
 from datetime import datetime
+import os
 
 ficha_paciente = {}
 
@@ -12,6 +13,7 @@ class Cor:
     ROSA = '\033[95m'
     AZUL = '\033[94m'
     CINZA_CLARO = '\033[90m'
+    VERMELHO = '\033[91m'
 
 
 def limpar_cores(texto_formatado):
@@ -19,14 +21,18 @@ def limpar_cores(texto_formatado):
     return re.sub(r'\033\[\d+m', '', texto_formatado)
 
 
+def limpar_console():
+    """
+    Limpa o console do usuário.
+    """
+    if os.name == 'posix':  # Unix/Linux/MacOS
+        os.system('clear')
+    elif os.name == 'nt':  # Windows
+        os.system('cls')
+
+
 def imprimir_linha(qnt):
     print(f'{Cor.ROSA}{"=" * qnt}{Cor.RESET}')
-
-
-def imprimir_e_text_linha_bonita(msg):
-    print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
-    print(f"{Cor.ROSA}* {msg} *{Cor.RESET}")
-    print(f"{Cor.ROSA}{'*' * (len(msg) + 4)}{Cor.RESET}")
 
 
 def imprimir_tabela_tipos_sanguineos():
@@ -87,7 +93,7 @@ def verifica_telefone(numero):
         return None
 
 
-def verifica_data(data):  # verifica o formato de data
+def verifica_data(data):
     try:
         datetime.strptime(data, '%d-%m-%Y')
         return True
@@ -97,10 +103,7 @@ def verifica_data(data):  # verifica o formato de data
 
 def verifica_data_futura(data):  # verifica se é em uma data futura
     try:
-        # Converter a string para um objeto datetime
         data_formatada = datetime.strptime(data, '%d-%m-%Y')
-
-        # Verificar se a data é no futuro em relação à data atual
         data_atual = datetime.now()
         if data_formatada > data_atual:
             return True
@@ -135,29 +138,3 @@ def escolher_opcao_lista(var, lista_opcoes, msg, alerta):  # função para escol
     return var
 
 
-def dict_append(chave, valor):
-    ficha_paciente[chave] = f"{Cor.VERDE}{valor}{Cor.RESET}"
-
-
-def imprimir_ficha_completa():
-    print(f"{Cor.VERDE}𝙛𝙞𝙘𝙝𝙖 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙖 𝙙𝙤 𝙥𝙖𝙘𝙞𝙚𝙣𝙩𝙚{Cor.RESET}")
-    print()
-
-    labels = [
-        "CPF",
-        "Nome do paciente",
-        "Idade do paciente",
-        "Data de nascimento",
-        "Endereço",
-        "Telefone(cel)",
-        "Sexo",
-        "Tipo sanguíneo",
-        "Alergia",
-        "Problema de saúde crônico",
-        "Atendimento prioritário",
-        "Tipo de exame",
-        "Data de exame"
-    ]
-
-    for label, valor in zip(labels, ficha_paciente.values()):
-        print(f"{Cor.CINZA}{label}:{Cor.RESET} {valor}")

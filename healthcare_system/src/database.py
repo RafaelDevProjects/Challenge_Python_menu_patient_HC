@@ -1,8 +1,8 @@
 # database.py
 from utils import *
 import sqlite3
-
-
+from utils import escolher_opcao, Cor
+import re
 
 def criar_tabela():
     # Função para criar a tabela no banco de dados
@@ -31,22 +31,17 @@ def criar_tabela():
     conn.commit()
     conn.close()
 
-
-def inserir_ficha_no_banco():
-    global ficha_paciente
+def inserir_ficha_no_banco(ficha_paciente):
     # Função para inserir a ficha do paciente no banco de dados
     conn = sqlite3.connect('../data/ficha_paciente.db')
     cursor = conn.cursor()
 
-    # Limpa a formatação dos dados
-    dados_limpos = {chave: re.sub(r'\033\[\d+m', '', valor) for chave, valor in ficha_paciente.items()}
-
     # Verificar se já existe um registro com o mesmo CPF
-    cursor.execute('SELECT * FROM ficha_paciente WHERE cpf = ?', (dados_limpos['cpf'],))
+    cursor.execute('SELECT * FROM ficha_paciente WHERE cpf = ?', (ficha_paciente['cpf'],))
     registro_existente = cursor.fetchone()
 
     if registro_existente:
-        print(f"Já existe um paciente cadastrado com o CPF {dados_limpos['cpf']}.")
+        print(f"Já existe um paciente cadastrado com o CPF {ficha_paciente['cpf']}.")
 
         # Perguntar se deseja atualizar os dados
         opcao_atualizar = input("Deseja atualizar os dados? (s/n): ").strip().lower()
@@ -60,14 +55,14 @@ def inserir_ficha_no_banco():
                     alergia=?, saude_cronico=?, prioritario=?, exame=?, data_exame=?
                 WHERE cpf=?
             ''', (
-                dados_limpos['nome'], dados_limpos['idade'], dados_limpos['data_nascimento'],
-                dados_limpos['endereco'], dados_limpos['telefone'], dados_limpos['sexo'],
-                dados_limpos['tipo_sanguineo'], dados_limpos['alergia'], dados_limpos['saude_cronico'],
-                dados_limpos['prioritario'], dados_limpos['exame'], dados_limpos['data_exame'], dados_limpos['cpf']
+                ficha_paciente['nome'], ficha_paciente['idade'], ficha_paciente['data_nascimento'],
+                ficha_paciente['endereco'], ficha_paciente['telefone'], ficha_paciente['sexo'],
+                ficha_paciente['tipo_sanguineo'], ficha_paciente['alergia'], ficha_paciente['saude_cronico'],
+                ficha_paciente['prioritario'], ficha_paciente['exame'], ficha_paciente['data_exame'], ficha_paciente['cpf']
             ))
-            print("Dados atualizados com sucesso!")
+            print("Dados atualizados com sucesso! \n")
         else:
-            print("Cadastro não foi atualizado.")
+            print("Cadastro não foi atualizado. \n")
 
     else:
         # Inserir os dados da ficha do paciente
@@ -77,14 +72,43 @@ def inserir_ficha_no_banco():
              saude_cronico, prioritario, exame, data_exame)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
-            dados_limpos['cpf'], dados_limpos['nome'], dados_limpos['idade'],
-            dados_limpos['data_nascimento'], dados_limpos['endereco'], dados_limpos['telefone'],
-            dados_limpos['sexo'], dados_limpos['tipo_sanguineo'], dados_limpos['alergia'],
-            dados_limpos['saude_cronico'], dados_limpos['prioritario'], dados_limpos['exame'],
-            dados_limpos['data_exame']
+            ficha_paciente['cpf'], ficha_paciente['nome'], ficha_paciente['idade'],
+            ficha_paciente['data_nascimento'], ficha_paciente['endereco'], ficha_paciente['telefone'],
+            ficha_paciente['sexo'], ficha_paciente['tipo_sanguineo'], ficha_paciente['alergia'],
+            ficha_paciente['saude_cronico'], ficha_paciente['prioritario'], ficha_paciente['exame'],
+            ficha_paciente['data_exame']
         ))
 
-        print("Cadastro realizado com sucesso!")
+        print("Cadastro realizado com sucesso! \n")
 
     conn.commit()
     conn.close()
+
+def deletar_exames_por_cpf(cpf):
+    conn = sqlite3.connect('../data/ficha_paciente.db')
+    cursor = conn.cursor()
+
+    # Verificar se existe algum registro com o CPF fornecido
+    cursor.execute('SELECT * FROM ficha_paciente WHERE cpf = ?', (cpf,))
+    registro = cursor.fetchone()
+
+    if registro:
+        # Se o registro existir, deletar os exames associados a esse CPF
+        cursor.execute('DELETE FROM ficha_paciente WHERE cpf = ?', (cpf,))
+        conn.commit()
+        print(f"{Cor.VERDE}Exames do paciente com CPF {cpf} deletados com sucesso.{Cor.RESET}")
+    else:
+        print(f"{Cor.CINZA}Não foram encontrados registros para o CPF {cpf}.{Cor.RESET}")
+
+    conn.close()
+
+def verificar_cpf_existente(cpf):
+    conn = sqlite3.connect('../data/ficha_paciente.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT COUNT(*) FROM ficha_paciente WHERE cpf = ?', (cpf,))
+    count = cursor.fetchone()[0]
+
+    conn.close()
+
+    return count > 0

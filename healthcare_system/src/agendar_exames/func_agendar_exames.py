@@ -18,12 +18,18 @@ def pega_idade():
 
 def pega_data_nascimento():
     while True:
-        data_nascimento = input("Data de nascimento do paciente DD-MM-YYYY:")
+        data_nascimento = input("Data de nascimento do paciente (DD-MM-YYYY): ")
         if verifica_data(data_nascimento):
-            return data_nascimento
+            data_nascimento_obj = datetime.strptime(data_nascimento, '%d-%m-%Y')
+            data_atual = datetime.now()
+            if data_nascimento_obj < data_atual:
+                return data_nascimento
+            else:
+                print(
+                    f"{Cor.CINZA_CLARO}Data de nascimento inválida. Deve ser anterior à data atual.{Cor.RESET}")
         else:
             print(
-                f"{Cor.CINZA_CLARO}Data de nascimento inválida, deve ser preenchida neste formato: DD-MM-YYYY{Cor.RESET}")
+                f"{Cor.CINZA_CLARO}Data de nascimento inválida. Deve ser preenchida neste formato: DD-MM-YYYY{Cor.RESET}")
 
 
 def pega_telefone():
@@ -46,8 +52,8 @@ def pega_sexo():
 def pega_tipo_sanguineo():
     imprimir_tabela_tipos_sanguineos()
     lista_sangue = ["a-", "a+", "b+", "b-", "ab+", "ab-", "o+", "o-"]
-    tipo_sanguineo = escolher_opcao_lista(input("Tipo Sanguíneo do paciente:"), lista_sangue,
-                                          "Tipo Sanguíneo do paciente:",
+    tipo_sanguineo = escolher_opcao_lista(input("Tipo Sanguíneo do paciente: "), lista_sangue,
+                                          "Tipo Sanguíneo do paciente: ",
                                           f"{Cor.CINZA_CLARO}O tipo sanguíneo deve ser uma opção existente ex:{lista_sangue}{Cor.RESET}")
     return tipo_sanguineo
 
@@ -105,19 +111,34 @@ def pega_data_exame():
     while True:
         data_exame = input("Data para realização do exame DD-MM-YYYY:")
         if verifica_data_futura(data_exame):
-            print("Agendamento realizado com sucesso!")
             return data_exame
             break
         else:
             print(
                 f"{Cor.CINZA_CLARO}Data inválida, deve ser preenchido neste formato: DD-MM-YYYY (dia-mês-ano).{Cor.RESET}")
 
+def dict_append(chave, valor):
+    ficha_paciente[chave] = valor
 
-def limpar_console():
-    """
-    Limpa o console do usuário.
-    """
-    if os.name == 'posix':  # Unix/Linux/MacOS
-        os.system('clear')
-    elif os.name == 'nt':  # Windows
-        os.system('cls')
+
+def imprimir_ficha_completa():
+    print(f"{Cor.VERDE}𝙛𝙞𝙘𝙝𝙖 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙖 𝙙𝙤 𝙥𝙖𝙘𝙞𝙚𝙣𝙩𝙚{Cor.RESET}")
+    labels = [
+        "CPF",
+        "Nome do paciente",
+        "Data de nascimento",
+        "Idade do paciente",
+        "Endereço",
+        "Telefone(cel)",
+        "Sexo",
+        "Tipo sanguíneo",
+        "Alergia",
+        "Problema de saúde crônico",
+        "Atendimento prioritário",
+        "Tipo de exame",
+        "Data de exame"
+    ]
+
+    for label, valor in zip(labels, ficha_paciente.values()):
+        print(f"{Cor.CINZA}{label}:{Cor.RESET} {valor}")
+
