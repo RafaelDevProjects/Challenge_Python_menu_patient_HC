@@ -30,9 +30,10 @@ def agendar_exame():
         idade = hoje.year - ano_nascimento
         dict_append("idade", idade)
 
-        # pega o endereço
-        endereco = input("Endereço do paciente:")
-        dict_append("endereco", endereco)
+        # pega o CEP
+        cep = input("CEP do paciente:")
+        consultar_cep(cep)
+        dict_append("endereco", cep)
 
         # pega o telefone ja formatado
         telefone_formatado = pega_telefone()

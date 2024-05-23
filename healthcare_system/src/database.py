@@ -2,6 +2,7 @@
 from utils import *
 import sqlite3
 from utils import escolher_opcao, Cor
+import json
 import re
 
 def criar_tabela():
@@ -129,3 +130,25 @@ def verificar_cpf_existente(cpf):
     conn.close()
 
     return count > 0
+
+def exportar_exames_para_json():
+    data_dir = os.path.join(os.path.dirname(__file__), '../data')
+    file_path = os.path.join(data_dir, 'exames.json')
+
+    conn = sqlite3.connect('../data/ficha_paciente.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM ficha_paciente')
+    exames = cursor.fetchall()
+
+    # Obter os nomes das colunas
+    colunas = [descricao[0] for descricao in cursor.description]
+
+    exames_dict = [dict(zip(colunas, exame)) for exame in exames]
+
+    with open(file_path, 'w', encoding='utf-8') as f:
+        json.dump(exames_dict, f, ensure_ascii=False, indent=4)
+
+    print(f"Dados exportados para o arquivo {file_path} com sucesso!")
+
+    conn.close()

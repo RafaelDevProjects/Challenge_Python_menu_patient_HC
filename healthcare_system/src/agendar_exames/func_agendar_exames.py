@@ -1,6 +1,6 @@
 import os
 from healthcare_system.src.utils import *
-
+import requests
 
 def pega_cpf():
     cpf = input("CPF do paciente:")
@@ -8,6 +8,34 @@ def pega_cpf():
         print(f"{Cor.CINZA_CLARO}CPF inválido. Deve conter 11 dígitos numéricos e ser válido.{Cor.RESET}")
         cpf = input("CPF do paciente:")
     return cpf
+
+
+def consultar_cep(cep):
+    while True:
+        url = f"https://viacep.com.br/ws/{cep}/json/"
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                data = response.json()
+                if 'erro' not in data:
+                    endereco = {
+                        'cep': data['cep'],
+                        'logradouro': data['logradouro'],
+                        'complemento': data['complemento'],
+                        'bairro': data['bairro'],
+                        'localidade': data['localidade'],
+                        'uf': data['uf'],
+                    }
+                    return endereco
+                else:
+                    print("CEP não encontrado.")
+                    cep = input("Digite o CEP novamente: ")
+            else:
+                print("Erro ao consultar o CEP.")
+                cep = input("Digite o CEP novamente: ")
+        except requests.RequestException as e:
+            print("Erro de conexão:", e)
+            cep = input("Digite o CEP novamente: ")
 
 
 def pega_idade():
@@ -152,7 +180,7 @@ def imprimir_ficha_completa():
         "Nome do paciente",
         "Data de nascimento",
         "Idade do paciente",
-        "Endereço",
+        "Cep",
         "Telefone(cel)",
         "Sexo",
         "Tipo sanguíneo",
