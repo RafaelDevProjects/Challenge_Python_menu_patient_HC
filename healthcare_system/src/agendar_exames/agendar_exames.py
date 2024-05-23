@@ -32,8 +32,10 @@ def agendar_exame():
 
         # pega o CEP
         cep = input("CEP do paciente:")
-        consultar_cep(cep)
-        dict_append("endereco", cep)
+        endereco = consultar_cep(cep)
+        print(endereco)
+        dict_append("endereco", endereco)
+
 
         # pega o telefone ja formatado
         telefone_formatado = pega_telefone()

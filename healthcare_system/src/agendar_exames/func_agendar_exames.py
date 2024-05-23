@@ -26,7 +26,9 @@ def consultar_cep(cep):
                         'localidade': data['localidade'],
                         'uf': data['uf'],
                     }
-                    return endereco
+
+                    endereco_retornado = f"{endereco['logradouro']}, {endereco['bairro']}, {endereco['localidade']}, {endereco['uf']}"
+                    return endereco_retornado
                 else:
                     print("CEP não encontrado.")
                     cep = input("Digite o CEP novamente: ")
@@ -180,7 +182,7 @@ def imprimir_ficha_completa():
         "Nome do paciente",
         "Data de nascimento",
         "Idade do paciente",
-        "Cep",
+        "Endereco",
         "Telefone(cel)",
         "Sexo",
         "Tipo sanguíneo",

@@ -4,7 +4,6 @@
 
 Este é um projeto em Python desenvolvido para o Hospital das Clínicas, que visa facilitar o cadastro de pacientes de forma organizada e eficiente.
 
-
 ## Funcionalidades Detalhadas
 
 1. **Cadastro de Pacientes:**
@@ -14,13 +13,17 @@ Este é um projeto em Python desenvolvido para o Hospital das Clínicas, que vis
 2. **Validação de Dados:**
    - Antes de aceitar as informações inseridas pelo usuário, o sistema realiza validações para garantir que os dados estejam corretos e consistentes.
    - Por exemplo, verifica-se se o CPF possui o formato correto e se é um número válido, se a data de nascimento está no formato esperado e se é uma data válida, se o número de telefone possui a formatação adequada, entre outras validações.
+   
+3. **Validação de CEP com API:**
+   - O sistema utiliza uma API de consulta de CEP para validar e obter o endereço a partir do CEP fornecido pelo usuário.
+   - Essa funcionalidade garante que o endereço seja preenchido corretamente, economizando tempo e evitando erros de digitação.
 
-3. **Agendamento de Exames:**
+4. **Agendamento de Exames:**
    - Além do cadastro básico do paciente, o sistema também permite o agendamento de exames.
    - O usuário pode escolher o tipo de exame que deseja realizar a partir de uma lista pré-definida, como raio-x, ultrassom, tomografia, entre outros.
    - O sistema também solicita a data desejada para realização do exame, garantindo uma melhor organização e planejamento das atividades do hospital.
 
-4. **Priorização de Atendimento:**
+5. **Priorização de Atendimento:**
    - Uma funcionalidade importante é a capacidade de identificar pacientes prioritários, como pessoas com deficiência (PCD), idosos ou gestantes.
    - Isso permite que a equipe médica priorize o atendimento desses pacientes, garantindo que recebam a assistência necessária de forma mais rápida e eficiente.
 
@@ -36,14 +39,14 @@ O banco de dados possui uma tabela chamada ficha_paciente, que contém os seguin
 - idade: Idade do paciente
 - data_nascimento: Data de nascimento do paciente 
 - endereco: Endereço do paciente
--  telefone: Número de telefone do paciente
--  sexo: Sexo do paciente
--  tipo_sanguineo: Tipo sanguíneo do paciente
--  alergia: Alergias do paciente
--  saude_cronico: Problemas de saúde crônicos do paciente
--  prioritario: Indicação de atendimento prioritário do paciente
--  exame: Tipo de exame agendado para o paciente
--  data_exame: Data do exame agendado para o paciente
+- telefone: Número de telefone do paciente
+- sexo: Sexo do paciente
+- tipo_sanguineo: Tipo sanguíneo do paciente
+- alergia: Alergias do paciente
+- saude_cronico: Problemas de saúde crônicos do paciente
+- prioritario: Indicação de atendimento prioritário do paciente
+- exame: Tipo de exame agendado para o paciente
+- data_exame: Data do exame agendado para o paciente
 
 ### Operações no Banco de Dados
 As principais operações realizadas no banco de dados são:
@@ -57,8 +60,6 @@ As principais operações realizadas no banco de dados são:
 A conexão com o banco de dados é feita utilizando a biblioteca SQLite3 do Python. Os arquivos de banco de dados são criados na pasta data do projeto e são manipulados por meio de funções definidas no arquivo database.py.
 
 Para mais detalhes sobre a estrutura do banco de dados e as operações disponíveis, consulte o código-fonte do projeto e a documentação das funções relacionadas ao banco de dados.
-
-
 
 ## Requisitos
 
@@ -78,7 +79,6 @@ Para mais detalhes sobre a estrutura do banco de dados e as operações disponí
     ```
 
 3. Siga as instruções fornecidas pelo programa para realizar o cadastro de pacientes.
-
 
 ## Nome e RM dos desenvolvedores do projeto
 
