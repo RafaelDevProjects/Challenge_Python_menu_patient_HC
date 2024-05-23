@@ -1,0 +1,17 @@
+[
+    {
+        "cpf": "45606592819",
+        "nome": "rafael",
+        "idade": 20,
+        "data_nascimento": "11-06-2004",
+        "endereco": "da",
+        "telefone": "(11) 97979-1626",
+        "sexo": "m",
+        "tipo_sanguineo": "a-",
+        "alergia": "não possui",
+        "saude_cronico": "não possui",
+        "prioritario": "não prioritario",
+        "exame": "raio-x",
+        "data_exame": "11-05-2025"
+    }
+]
